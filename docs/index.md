@@ -7,6 +7,13 @@ title: Welcome to ChatBridge
 
 **ChatBridge** is a text translation service via WhatsApp that acts as a linguistic bridge between people who speak different languages. By using a Twilio number, messages received in one language are automatically translated into the recipient's language. Responses are also translated back into the sender's original language, ensuring seamless communication.
 
+## Watch the Introduction Video
+
+<div class="responsive-iframe-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/pIi9RA-OGJ8?start=9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+
 ### Key Features:
 - **Real-Time Automatic Translation:** Translates incoming and outgoing messages using translation models such as Hugging Face, with Gemini as a backup.
 - **Automatic Language Detection:** The service automatically detects the language of incoming messages.
