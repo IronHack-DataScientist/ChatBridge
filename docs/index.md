@@ -1,10 +1,52 @@
 ---
 layout: default
-title: Bienvenido a ChatBridge
+title: Welcome to ChatBridge
 ---
 
 # ChatBridge
-# Add project brief
+
+**ChatBridge** is a text translation service via WhatsApp that acts as a linguistic bridge between people who speak different languages. By using a Twilio number, messages received in one language are automatically translated into the recipient's language. Responses are also translated back into the sender's original language, ensuring seamless communication.
+
+### Key Features:
+- **Real-Time Automatic Translation:** Translates incoming and outgoing messages using translation models such as Hugging Face, with Gemini as a backup.
+- **Automatic Language Detection:** The service automatically detects the language of incoming messages.
+- **Bidirectional Support:** Messages are translated in both directions, allowing for smooth conversation between two people who speak different languages.
+
+## Project Architecture
+
+### Workflow:
+1. **Twilio Integration**: Incoming messages are received through a Twilio number associated with your WhatsApp account.
+2. **Language Detection**: The language of the incoming message is automatically detected using the translation API.
+3. **Translation Service**: Messages are translated using Hugging Face as the primary translation service, with Gemini as a backup option if necessary.
+4. **Assigning Target Numbers and Languages**: 
+    - The service allows the business owner to dynamically assign a target number by sending a command like `to:<target_number>` via WhatsApp.
+    - The language and ISO code associated with that target number are retrieved and stored for use in subsequent translations.
+5. **Handling Messages from the Business Owner**:
+    - If the message from the business owner starts with `to:`, the service updates the target recipient and language settings.
+    - If the message is a normal text message, it gets translated and forwarded to the currently assigned target number.
+    - If the message is "exit", the current session is ended, and all target information is cleared.
+6. **Response Handling**: Replies from the recipient are translated back into the sender's language and relayed through the Twilio number.
+
+### Technical Details:
+- **Twilio**: Used to manage sending and receiving WhatsApp messages. The integration handles both incoming and outgoing message flows.
+- **Hugging Face & Gemini**: These are the translation models utilized to ensure high-quality translations. Hugging Face is the primary model, while Gemini serves as a backup.
+- **Python and Flask**: The backend is implemented using Python and Flask, managing the workflow from language detection to message translation and delivery.
+- **CSV Handler**: A custom CSV handler is used to store and retrieve language preferences and ISO codes associated with different WhatsApp numbers.
+
+## How to Use ChatBridge
+
+1. **Start a Conversation**: Send a message to the Twilio number associated with the service. The service will detect the language and translate the message before forwarding it.
+2. **Assign a Target Number**: As a business owner, you can set the recipient of your translated messages by sending a WhatsApp message with the format `to:<target_number>`. This command assigns a new recipient for your outgoing messages.
+3. **Automatic Translation**: After setting the target number, any message you send will be automatically translated into the target language and sent to the designated number.
+4. **End a Session**: If you wish to stop the translation service temporarily, send "exit" from your WhatsApp account. This will clear the current session.
+
+### Example:
+- **Scenario**: A Spanish-speaking business owner receives a message in English and wants to reply.
+    - **Customer (English)**: "Hello, I would like to know more about your services."
+    - **ChatBridge**: Detects English, translates the message to Spanish, and sends: "Hola, me gustaría saber más sobre sus servicios."
+    - **Business Owner (Spanish)**: "Claro, ¿cómo puedo ayudarte?"
+    - **ChatBridge**: Translates the message back to English and sends: "Sure, how can I help you?"
+
 
 ## People Around the World (Tableau)
 
@@ -332,3 +374,12 @@ This code snippet creates a heatmap to visualize the average BLEU scores for eac
 <div class="responsive-iframe-container">
     <iframe src="Resources/heatmap_average_bleu_score_by_language_pair.html" width="100%" height="600px"></iframe>
 </div>
+
+## Contributions and Future Improvements
+
+We welcome contributions and suggestions to improve ChatBridge. If you have ideas on how we can enhance the service or if you'd like to collaborate, feel free to open an issue or submit a pull request.
+
+### Future Improvements:
+- Support for more languages.
+- Improved accuracy in language detection.
+- User customization of translation models.
