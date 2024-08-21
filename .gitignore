@@ -13,7 +13,8 @@
 # Ignore everything in the tests directory
 /tests/*
 
-# Except the TestTranslate.py
+# Except the TestTranslate.py file
 !/tests/TestTranslate.py
-# Ignore .env
+
+# Ignore the .env file
 .env
