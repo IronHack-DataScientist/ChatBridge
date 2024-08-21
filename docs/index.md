@@ -390,3 +390,88 @@ We welcome contributions and suggestions to improve ChatBridge. If you have idea
 - Support for more languages.
 - Improved accuracy in language detection.
 - User customization of translation models.
+
+<style>
+/* Ocultar el sidebar */
+#sidebar {
+    display: none;
+}
+
+/* Hacer que los iframes sean responsivos */
+.responsive-iframe-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%; /* Relación de aspecto 16:9 */
+}
+
+.responsive-iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Ajustes generales para que el contenido sea más responsivo */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    p, ul, li {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    p, ul, li {
+        font-size: 14px;
+    }
+}
+</style>
