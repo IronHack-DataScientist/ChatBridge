@@ -145,7 +145,9 @@ This bubble chart visualizes the distribution of languages based on the number o
     </script>
 </div>
 
-# Comparison of Translation Times by Model
+# Comparison by Model
+
+## Comparison of Translation Times by Model
 
 This bar chart compares the translation times between two different translation models, "HF" and "Gemini." The data is melted to align both models on a single axis, showing the translation time (in seconds) for each model. The bars are grouped by model, allowing for a clear comparison of performance in terms of speed.
 
@@ -158,7 +160,175 @@ This visualization helps to quickly assess which model performs translations fas
     <iframe src="Resources/comparison_translation_times.html" width="100%" height="600px"></iframe>
 </div>
 
-## Dashboard Interactivo de Tableau
+## Translation Times by Target Language and Model
+
+This bar chart illustrates the translation times (in seconds) for two different translation models, "HF" and "Gemini," across various target languages. The chart groups the bars by target language and distinguishes between the models using color.
+
+- **Target Language**: The language into which the text is being translated.
+- **HF Model**: Represents the translation times for the HF translation system.
+- **Gemini Model**: Represents the translation times for the Gemini translation system.
+
+This visualization allows for a comparative analysis of how each model performs in translating into different target languages, highlighting variations in speed across languages and models.
+
 <div class="responsive-iframe-container">
-    <iframe src="tableau_dashboard.html" width="100%" height="600px"></iframe>
+    <iframe src="Resources/translation_times_by_target_language.html" width="100%" height="600px"></iframe>
+</div>
+
+## Translation Times by Text Type and Model
+
+This bar chart displays the translation times (in seconds) for two different translation models, "HF" and "Gemini," categorized by text type. The chart groups the bars by text type, with color distinguishing the two models.
+
+- **Text Type**: The category of text being translated, such as word, sentence, or paragraph.
+- **HF Model**: Represents the translation times for the HF translation system.
+- **Gemini Model**: Represents the translation times for the Gemini translation system.
+
+This visualization provides insight into how each model performs across different types of text, allowing for a comparative analysis of translation speed based on the complexity or length of the text.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/translation_times_by_text_type.html" width="100%" height="600px"></iframe>
+</div>
+
+## Heatmap of Translation Times by Source and Target Language
+
+This heatmap visualizes the translation times (in seconds) for different source and target language pairs across two translation models, "Hugging Face" and "Gemini." The data is displayed in two facets, one for each model, allowing a side-by-side comparison of how each model performs across various language pairs.
+
+- **Source Language**: The original language of the text before translation.
+- **Target Language**: The language into which the text is translated.
+- **Translation Time (s)**: The time taken by each model to perform the translation, represented by color intensity on the heatmap.
+
+The heatmap provides a clear overview of how translation time varies depending on the source and target language combination, as well as differences in performance between the two models.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/heatmap_translation_times.html" width="100%" height="600px"></iframe>
+</div>
+
+## Translation Times by Source and Target Language for Each Model
+
+This bar chart illustrates the translation times (in seconds) for various source and target language pairs across two different translation models: "HF" and "Gemini." The data is displayed in two separate facets, one for each model, allowing for a direct comparison of performance across languages within each model.
+
+- **Source Language**: The original language of the text before translation.
+- **Target Language**: The language into which the text is translated.
+- **Translation Time (s)**: The time taken by each model to perform the translation.
+
+The bars are grouped by target language within each source language category, providing a visual comparison of translation times between different language pairs for both the HF and Gemini models. This chart highlights the variations in translation speed depending on the language combination and the translation model used.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/translation_times_by_language_and_model.html" width="100%" height="600px"></iframe>
+</div>
+
+## Distribution of Translation Times by Text Type and Model
+
+A box plot can effectively display the distribution of translation times across different text types for the two translation models, "HF" and "Gemini." This plot will highlight the median, quartiles, and potential outliers in the translation times, providing insights into the consistency and variability of each model's performance. By comparing these distributions, you can assess which model is more consistent across different text types and identify any significant differences in translation time.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/boxplot_translation_times.html" width="100%" height="600px"></iframe>
+</div>
+
+## Correlation Between HF and Gemini Translation Times by Language Pair
+
+A scatter plot can be used to explore the correlation between translation times for the HF and Gemini models across different language pairs. This type of plot will help identify if there are specific source-target language pairs that consistently require more time, potentially revealing linguistic complexities or inefficiencies in the models. The scatter plot can be color-coded by the source language and use different symbols for the target languages to enhance interpretability.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/scatter_translation_correlation.html" width="100%" height="600px"></iframe>
+</div>
+
+# BLEU Score Calculation for Translation Performance
+
+This snippet of code calculates the BLEU (Bilingual Evaluation Understudy) score, a common metric for evaluating the quality of machine-translated text. In this case, the BLEU score is used to compare the translations produced by the "HF" (Hugging Face) model against the "Gemini" model, which is treated as the reference translation.
+
+## Explanation
+
+1. **BLEU Score Calculation**:
+   - The BLEU score is calculated by comparing the candidate translation (produced by the HF model) against a reference translation (produced by the Gemini model).
+   - The `sentence_bleu` function from the `nltk.translate.bleu_score` module is used, which requires splitting the text into words (tokens) and then comparing these tokens between the candidate and reference translations.
+   - A smoothing function (`SmoothingFunction().method1`) is applied to handle cases where the candidate translation may not have any n-grams in common with the reference.
+
+2. **Function Definition**:
+   - `calculate_bleu(row)`: This function takes a row from the dataframe, splits the "Gemini Translated Text" and "HF Translated Text" into word tokens, and calculates the BLEU score between them.
+
+3. **Applying the Function**:
+   - The `apply` method is used to apply the `calculate_bleu` function to each row of the dataframe, creating a new column `BLEU Score` that stores the result.
+
+4. **Visualization**:
+   - The script prints the `HF Translated Text`, `Gemini Translated Text`, and the corresponding `BLEU Score` for each row in the dataframe, allowing for a quick comparison of translation quality between the two models.
+
+## Distribution and Comparison of BLEU Scores
+
+This code snippet generates two key visualizations to analyze the BLEU scores calculated from the comparison of translations between the "HF" (Hugging Face) and "Gemini" models.
+
+### 1. Histogram of BLEU Scores
+- **Purpose**: The histogram visualizes the distribution of BLEU scores across all translation pairs.
+- **Details**: 
+  - The BLEU scores are binned into 20 intervals (`nbins=20`), providing a clear view of how the scores are spread out.
+  - The histogram helps to identify the range of BLEU scores, showing whether most translations are close to the reference or if there's significant variability in the quality of translations.
+
+### 2. Box Plot of BLEU Scores by Text Type
+- **Purpose**: The box plot compares the distribution of BLEU scores across different text types (e.g., word, sentence, paragraph).
+- **Details**:
+  - The x-axis represents different text types, while the y-axis shows the corresponding BLEU scores.
+  - The box plot displays the median, quartiles, and any outliers in the BLEU scores for each text type, allowing for a comparison of translation quality between text types.
+  - This visualization helps identify whether certain types of text are consistently harder to translate accurately for the HF model compared to the Gemini model.
+
+  <div class="responsive-iframe-container">
+    <iframe src="Resources/histogram_bleu_scores.html" width="100%" height="600px"></iframe>
+</div>
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/boxplot_bleu_scores.html" width="100%" height="600px"></iframe>
+</div>
+
+## BLEU Score Distribution by Source Language
+
+This code snippet calculates the BLEU score for each translation in the dataset, comparing the "HF" (Hugging Face) model translations against the "Gemini" model as the reference. The BLEU scores are then visualized in a histogram, with the distribution separated by source language.
+
+### BLEU Score Calculation
+- **Purpose**: The function `calculate_bleu` computes the BLEU score for each translation pair, using the "Gemini" translation as the reference and the "HF" translation as the candidate.
+- **Details**: The BLEU score provides a numerical measure of how closely the HF translations match the Gemini translations, with smoothing applied to handle rare or zero n-gram overlaps.
+
+### Histogram of BLEU Scores by Source Language
+- **Purpose**: The histogram visualizes the distribution of BLEU scores across different source languages.
+- **Details**:
+  - The BLEU scores are binned into 20 intervals (`nbins=20`), and the bars are color-coded by source language.
+  - This visualization highlights how translation quality, as measured by BLEU score, varies depending on the source language.
+  - The histogram allows for an easy comparison of BLEU score distributions across different languages, identifying which languages may present more challenges in achieving high-quality translations.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/histogram_bleu_scores_by_source_language.html" width="100%" height="600px"></iframe>
+</div>
+
+## Comparison of BLEU Scores by Text Type and Source Language
+
+This code snippet generates a box plot to compare the BLEU scores across different text types and source languages. The plot provides insights into how translation quality, as measured by BLEU score, varies depending on the type of text and the language of the original text.
+
+### Box Plot of BLEU Scores
+- **Purpose**: The box plot visually compares the distribution of BLEU scores for different text types (e.g., word, sentence, paragraph) and separates these comparisons by source language.
+- **Details**:
+  - The x-axis represents the text type, while the y-axis shows the corresponding BLEU scores.
+  - The boxes are color-coded by source language, allowing for a clear comparison of translation quality across languages for each text type.
+  - The box plot displays the median, quartiles, and any outliers in BLEU scores, highlighting variations in translation accuracy based on both the text type and the language of origin.
+  - This visualization helps identify which combinations of text type and source language result in more accurate or less accurate translations according to the BLEU metric.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/boxplot_bleu_scores_by_text_type_and_source_language.html" width="100%" height="600px"></iframe>
+</div>
+
+## Heatmap of Average BLEU Scores by Language Pair
+
+This code snippet creates a heatmap to visualize the average BLEU scores for each source-target language pair. The heatmap provides a clear, comparative view of translation quality across different language pairs.
+
+### Grouping and Averaging BLEU Scores
+- **Purpose**: The data is first grouped by source and target languages, and the mean BLEU score is calculated for each language pair.
+- **Details**:
+  - The `groupby` function is used to aggregate BLEU scores by language pairs, providing the average BLEU score for each combination of source and target language.
+  - This aggregation allows for a high-level comparison of translation accuracy across different language pairs.
+
+### Heatmap of Average BLEU Scores
+- **Purpose**: The heatmap visually represents the average BLEU scores across all language pairs, making it easy to identify which pairs yield higher or lower translation quality.
+- **Details**:
+  - The x-axis represents the source language, and the y-axis represents the target language.
+  - The color intensity in each cell corresponds to the average BLEU score for that particular language pair.
+  - This visualization helps in identifying which language pairs are more challenging to translate accurately and which pairs yield better translation performance, as indicated by higher BLEU scores.
+
+<div class="responsive-iframe-container">
+    <iframe src="Resources/heatmap_average_bleu_score_by_language_pair.html" width="100%" height="600px"></iframe>
 </div>
