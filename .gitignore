@@ -1,0 +1,14 @@
+# Ignore everything in the modules directory
+/modules/*
+
+# Except the translation directory
+!/modules/translation/
+
+# Ignore everything in the translation directory
+/modules/translation/*
+
+# Except the hf_translation.py file
+!/modules/translation/hf_translation.py
+
+# Ignore .env
+.env
