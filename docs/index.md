@@ -401,7 +401,6 @@ We welcome contributions and suggestions to improve ChatBridge. If you have idea
 .responsive-iframe-container {
     position: relative;
     overflow: hidden;
-    padding-top: 56.25%; /* Relación de aspecto 16:9 */
 }
 
 .responsive-iframe-container iframe {
