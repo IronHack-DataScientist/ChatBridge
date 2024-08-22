@@ -147,9 +147,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 For inquiries or support, please reach out to:
 
 - **Your Name**
-- **Email:** youremail@example.com
-- **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/yourprofile)
-- **GitHub:** [Your GitHub Profile](https://github.com/yourusername)
+- **Email:** info@customcodeint.com
+- **LinkedIn:** [Javier Esparza](https://www.linkedin.com/in/jreuman/)
+- **GitHub:** [JReuman1](https://github.com/JReuman1)
 
 ---
 
